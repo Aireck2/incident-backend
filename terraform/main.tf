@@ -7,6 +7,22 @@ terraform {
       version = "~> 5.0"
     }
   }
+  # Remote state backend — REQUIRED for GitHub Actions CI/CD.
+  #
+  # 1. Create backend resources first:
+  #      cd terraform/bootstrap && terraform apply
+  #
+  # 2. Uncomment the block below, then run:
+  #      terraform init -reconfigure
+  #    Respond "yes" to migrate state from local → S3.
+  #
+  backend "s3" {
+    bucket         = "incident-backend-tfstate"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "incident-backend-tfstate-lock"
+  }
 }
 
 provider "aws" {
