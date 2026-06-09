@@ -32,6 +32,8 @@ resource "aws_s3_bucket_public_access_block" "web" {
 resource "aws_s3_bucket_policy" "web" {
   bucket = aws_s3_bucket.web.id
   policy = data.aws_iam_policy_document.web.json
+
+  depends_on = [aws_s3_bucket_public_access_block.web]
 }
 
 data "aws_iam_policy_document" "web" {
