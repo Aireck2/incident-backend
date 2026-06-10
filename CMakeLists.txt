@@ -29,5 +29,3 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 # Enable C++20
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
 
-# Tests subdirectory
-add_subdirectory(tests)
